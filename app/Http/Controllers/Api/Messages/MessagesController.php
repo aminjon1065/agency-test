@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\Messages;
 
-use App\Http\Controllers\Api\Files\FilesController;
 use App\Http\Controllers\Controller;
 use App\Models\Messages;
 use Illuminate\Http\Request;
@@ -26,9 +25,10 @@ class MessagesController extends Controller
                 'data' => $validator->messages()
             ], 500);
         }
+
         if ($request->hasFile('files_link')) {
             foreach ($request->file('files_link') as $file) {
-                $name = rand() . ' - ' . $file->getClientOriginalName();
+                $name = rand() . '-' . $file->getClientOriginalName();
                 $folderName = date('d-m-Y') . '/email-files';
                 $file->move(public_path() . '/' . $folderName, $name);
                 $files_links[] = $folderName . '/' . $name;
