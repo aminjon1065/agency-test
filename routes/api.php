@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/upload', [\App\Http\Controllers\Api\Files\FilesController::class, 'upload'])->name('files.upload');
     Route::get('/files', [\App\Http\Controllers\Api\Files\FilesController::class, 'index'])->name('files.get');
     Route::post('/message', [\App\Http\Controllers\Api\Messages\MessagesController::class, 'newMessage'])->name('message.new');
+    Route::get('/inbox', [\App\Http\Controllers\Api\Messages\MessagesController::class, 'inbox'])->name('message.inbox');
     Route::get('/email/verify/{id}', [\App\Http\Controllers\Api\Auth\EmailVerification::class, 'verify']);
 //    Route::get('/email/resend', [\App\Http\Controllers\Api\Auth\EmailVerification::class, 'resend']);
 });

@@ -38,7 +38,6 @@ class MessagesController extends Controller
             'title' => $request->title,
             'subject' => $request->subject,
             'description' => $request->description,
-
             'files_link' => $files_links,
             'opened' => $request->opened,
             'from' => auth()->id(),
@@ -50,5 +49,12 @@ class MessagesController extends Controller
             'success' => true,
             'data' => $message
         ], 201);
+    }
+
+
+    public function inbox()
+    {
+        $messages = Messages::where('from', auth()->user()->id)->paginate(25);
+        return response()->json($messages);
     }
 }
