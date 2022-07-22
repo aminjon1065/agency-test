@@ -11,6 +11,7 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
@@ -20,6 +21,7 @@ class CreateMessagesTable extends Migration
             $table->text('description')->nullable();
             $table->json('files_link')->nullable();
             $table->boolean('opened')->default('0');
+            $table->boolean('favorite')->default('0');
             $table->unsignedBigInteger('from');
             $table->foreign('from')->references('id')->on('users');
             $table->unsignedBigInteger('to');
@@ -33,6 +35,7 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
+
     public function down()
     {
         Schema::dropIfExists('messages');
