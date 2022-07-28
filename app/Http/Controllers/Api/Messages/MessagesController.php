@@ -29,7 +29,7 @@ class MessagesController extends Controller
         if ($request->hasFile('files_link')) {
             foreach ($request->file('files_link') as $file) {
                 $name = rand() . '-' . $file->getClientOriginalName();
-                $folderName = date('d-m-Y') . '/email-files';
+                $folderName = date('d-m-Y') . '/email-files/'.auth()->user()->name;
                 $file->move(public_path() . '/' . $folderName, $name);
                 $files_links[] = $folderName . '/' . $name;
             }
