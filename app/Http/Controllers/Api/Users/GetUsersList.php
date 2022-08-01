@@ -11,6 +11,11 @@ class GetUsersList extends Controller
     public function getUsers()
     {
         $users = User::all(['id', 'name']);
-        return response()->json($users, 200);
+        $data = [];
+        foreach ($users as $key => $item) {
+            $data[$key]['value'] = $item['id'];
+            $data[$key]['label'] = $item['name'];
+        }
+        return response()->json($data, 200);
     }
 }
