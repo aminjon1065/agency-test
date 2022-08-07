@@ -85,7 +85,7 @@ class AuthController extends Controller
         }
 
         $token = auth()->user()->createToken('__sign_token')->plainTextToken;
-        $user = $this->isAuth($token)->only(['name', 'email', 'region', 'position', 'department', 'rank', 'avatar']);
+        $user = $this->isAuth($token);
         return response()->json([
             'status' => 'success',
             'message' => 'Успешно вошли в систему',
