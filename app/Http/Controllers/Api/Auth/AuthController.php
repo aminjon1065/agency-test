@@ -110,6 +110,8 @@ class AuthController extends Controller
         $user['email'] = $userAllInfo['email'];
         $user['rank'] = $userAllInfo['rank'];
         $user['position'] = $userAllInfo['position'];
+        $user['department'] = $userAllInfo['department'];
+        $user['region'] = $userAllInfo['region'];
         $user['signature'] = $userAllInfo['signature'];
         $user['avatar'] = $userAllInfo['avatar'];
         return $user;
