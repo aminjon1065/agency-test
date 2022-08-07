@@ -46,7 +46,7 @@ class AuthController extends Controller
             $signature->move($signaturePath, $signatureName),
             'signature' => $signatureName,
             $image = $request->file('avatar'),
-            $imageName = time() . '.' . $image->getClientOriginalName(),
+            $imageName = time() . '-' . $image->getClientOriginalName(),
             $imagePath = public_path('/avatars'),
             $image->move($imagePath, $imageName),
             'avatar' => $imageName,
@@ -85,7 +85,7 @@ class AuthController extends Controller
         }
 
         $token = auth()->user()->createToken('__sign_token')->plainTextToken;
-        $user = $this->me($token)->only(['name', 'email', 'region', 'position', 'department', 'rank', 'avatar']);
+        $user = $this->isAuth($token)->only(['name', 'email', 'region', 'position', 'department', 'rank', 'avatar']);
         return response()->json([
             'status' => 'success',
             'message' => 'Успешно вошли в систему',
@@ -103,8 +103,15 @@ class AuthController extends Controller
         ], 204);
     }
 
-    public function me()
+    public function isAuth()
     {
-        return \auth()->user();
+        $userAllInfo = \auth()->user();
+        $user['name'] = $userAllInfo['name'];
+        $user['email'] = $userAllInfo['email'];
+        $user['rank'] = $userAllInfo['rank'];
+        $user['position'] = $userAllInfo['position'];
+        $user['signature'] = $userAllInfo['signature'];
+        $user['avatar'] = $userAllInfo['avatar'];
+        return $user;
     }
 }

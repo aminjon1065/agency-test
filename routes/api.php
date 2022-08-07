@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [\App\Http\Controllers\Api\Auth\AuthController::class, 'register'])->name('user.register');
 Route::post('/login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login'])->name('user.login')->name('user.login');
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/me', [\App\Http\Controllers\Api\Auth\AuthController::class, 'me'])->name('user.me');
+    Route::get('/isAuth', [\App\Http\Controllers\Api\Auth\AuthController::class, 'isAuth'])->name('user.isAuth');
     Route::post('/logout', [\App\Http\Controllers\Api\Auth\AuthController::class, 'logout'])->name('user.logout');
     Route::post('/upload', [\App\Http\Controllers\Api\Files\FilesController::class, 'upload'])->name('files.upload');
     Route::get('/files', [\App\Http\Controllers\Api\Files\FilesController::class, 'index'])->name('files.get');
