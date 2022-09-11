@@ -16,6 +16,7 @@ class GetUsersList extends Controller
             $data[$key]['value'] = $item['id'];
             $data[$key]['label'] = $item['name'];
         }
-        return response()->json($data, 200);
+        $allUsers = [...$data];
+        return response()->json($data);
     }
 }
