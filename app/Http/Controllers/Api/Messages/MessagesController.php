@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class MessagesController extends Controller
 {
+
+    public function messagesCount()
+    {
+        $messages = Messages::where('from', auth()->user()->id)->where('opened', 0)->count();
+        return response()->json($messages);
+    }
     public function newMessage(Request $request)
     {
 //        return response()->json($request->allFiles());
@@ -71,4 +77,5 @@ class MessagesController extends Controller
 //        $messages['image'] = implode(' ', $messages['files_link']);
         return response()->json($messages);
     }
+
 }
