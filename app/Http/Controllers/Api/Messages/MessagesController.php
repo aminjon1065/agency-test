@@ -15,6 +15,7 @@ class MessagesController extends Controller
         $messages = Messages::where('from', auth()->user()->id)->where('opened', 0)->count();
         return response()->json($messages);
     }
+
     public function newMessage(Request $request)
     {
 //        return response()->json($request->allFiles());
@@ -72,7 +73,7 @@ class MessagesController extends Controller
 
     public function inbox()
     {
-        $messages = Messages::where('from', auth()->user()->id)->paginate(40);
+        $messages = Messages::where('from', auth()->user()->id)->paginate(20);
 
 //        $messages['image'] = implode(' ', $messages['files_link']);
         return response()->json($messages);
