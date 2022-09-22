@@ -12,7 +12,7 @@ class MessagesController extends Controller
 
     public function messagesCount()
     {
-        $messages = Messages::where('from', auth()->user()->id)->where('opened', 0)->count();
+        $messages = Messages::where('to', auth()->user()->id)->where('opened', 0)->count();
         return response()->json($messages);
     }
 
@@ -73,7 +73,7 @@ class MessagesController extends Controller
 
     public function inbox()
     {
-        $messages = Messages::where('from', auth()->user()->id)->paginate(15);
+        $messages = Messages::where('to', auth()->user()->id)->paginate(15);
 
 //        $messages['image'] = implode(' ', $messages['files_link']);
         return response()->json($messages);
