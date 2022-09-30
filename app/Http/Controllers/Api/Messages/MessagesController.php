@@ -73,10 +73,16 @@ class MessagesController extends Controller
 
     public function inbox()
     {
-        $messages = Messages::where('to', auth()->user()->id)->paginate(15);
-
+        $messages = Messages::where('to', auth()->user()->id)->orderByDesc('id')->paginate(15);
 //        $messages['image'] = implode(' ', $messages['files_link']);
         return response()->json($messages);
+    }
+
+    public function getMessage($id)
+    {
+        Messages::where('id', $id)->update(array('opened' => 1));
+        $message = Messages::find($id);
+        return response()->json($message);
     }
 
 }

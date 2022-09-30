@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/message', [\App\Http\Controllers\Api\Messages\MessagesController::class, 'newMessage'])->name('message.new');
         Route::get('/messages-count', [\App\Http\Controllers\Api\Messages\MessagesController::class, 'messagesCount'])->name('messages.count');
         Route::get('/inbox', [\App\Http\Controllers\Api\Messages\MessagesController::class, 'inbox'])->name('message.inbox');
+        Route::get('/inbox/{id}', [\App\Http\Controllers\Api\Messages\MessagesController::class, 'getMessage'])->name('message.get');
         Route::get('/email/verify/{id}', [\App\Http\Controllers\Api\Auth\EmailVerification::class, 'verify']);
         Route::get('/usersList', [\App\Http\Controllers\Api\Users\GetUsersList::class, 'getUsers'])->name('users.list');
     });
